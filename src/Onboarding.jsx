@@ -25,65 +25,107 @@ export default function Onboarding({ onComplete }) {
   };
 
   return (
-    <div className="container mt-5" style={{ maxWidth: '600px' }}>
-      <div className="card shadow-lg" style={{ borderRadius: '20px', border: 'none' }}>
-        <div className="card-header text-center" style={{ background: 'linear-gradient(135deg, #1e3c72, #2a5298)', color: 'white', borderRadius: '20px 20px 0 0', padding: '20px' }}>
-          <h4 className="fw-bold mb-0">🚀 KHỞI TẠO TRỢ LÝ CÁ NHÂN</h4>
+    <div className="container mt-5 fade-in" style={{ maxWidth: '550px' }}>
+      <div className="glass-panel overflow-hidden border-0">
+        <div className="gradient-header text-center py-4 px-3">
+          <h4 className="mb-1">🚀 KHỞI TẠO TRỢ LÝ</h4>
+          <p className="mb-0 opacity-75 small fw-medium">Cá nhân hóa trải nghiệm cho gia đình bạn</p>
         </div>
-        <div className="card-body p-4">
-          
+        
+        <div className="p-4 pt-5">
           {step === 1 && (
-            <div>
-              <h5 className="fw-bold mb-3 text-primary">Bước 1: Thông tin Gia đình</h5>
-              <p className="text-muted small">Thông tin này giúp Cố vấn AI nhận diện và gọi đúng tên gia đình bạn. Số điện thoại được dùng làm mã khóa an toàn để bạn quay lại xem dữ liệu sau này.</p>
+            <div className="fade-in">
+              <div className="d-flex align-items-center mb-4">
+                <div className="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '32px', height: '32px', flexShrink: 0, fontWeight: 800 }}>1</div>
+                <h5 className="mb-0">Thông tin Gia đình</h5>
+              </div>
               
-              <div className="mb-3">
-                <label className="form-label fw-bold">Điện thoại của Bố/Mẹ (Dùng làm Mật khẩu):</label>
-                <input type="text" className="form-control" placeholder="VD: 0912345678" value={formData.phone} onChange={e => setFormData({...formData, phone: e.target.value})} />
+              <p className="text-muted small mb-4">Thông tin này giúp Cố vấn AI nhận diện và xưng hô đúng với gia đình. Số điện thoại được dùng làm mã khóa bảo mật.</p>
+              
+              <div className="mb-4">
+                <label className="form-label small fw-bold text-uppercase opacity-75">Số điện thoại (Mật khẩu)</label>
+                <input 
+                  type="text" className="form-control form-input-modern" 
+                  placeholder="VD: 0912345678" 
+                  value={formData.phone} 
+                  onChange={e => setFormData({...formData, phone: e.target.value})} 
+                />
               </div>
-              <div className="mb-3">
-                <label className="form-label fw-bold">Tên của Bố/Mẹ (Để xưng hô):</label>
-                <input type="text" className="form-control" placeholder="VD: Mẹ Hương, Bố Tuấn" value={formData.parentName} onChange={e => setFormData({...formData, parentName: e.target.value})} />
+              
+              <div className="mb-4">
+                <label className="form-label small fw-bold text-uppercase opacity-75">Tên Bố/Mẹ (Để xưng hô)</label>
+                <input 
+                  type="text" className="form-control form-input-modern" 
+                  placeholder="VD: Mẹ Hương, Bố Tuấn" 
+                  value={formData.parentName} 
+                  onChange={e => setFormData({...formData, parentName: e.target.value})} 
+                />
               </div>
-              <div className="mb-3">
-                <label className="form-label fw-bold">Tên ở nhà/Tên thật của Sĩ tử:</label>
-                <input type="text" className="form-control" placeholder="VD: Bé Cua, Tít, Trí" value={formData.childName} onChange={e => setFormData({...formData, childName: e.target.value})} />
+              
+              <div className="mb-4">
+                <label className="form-label small fw-bold text-uppercase opacity-75">Tên Sĩ tử (Ở nhà/Thật)</label>
+                <input 
+                  type="text" className="form-control form-input-modern" 
+                  placeholder="VD: Bé Cua, Tít, Trí" 
+                  value={formData.childName} 
+                  onChange={e => setFormData({...formData, childName: e.target.value})} 
+                />
               </div>
-              <button className="btn btn-primary w-100 fw-bold mt-3" style={{ padding: '12px', borderRadius: '12px' }} onClick={nextStep}>TIẾP TỤC ➡️</button>
+              
+              <button className="btn-modern btn-primary w-100 mt-2 py-3" onClick={nextStep}>
+                TIẾP TỤC BƯỚC 2 <span style={{ marginLeft: '8px' }}>→</span>
+              </button>
             </div>
           )}
 
           {step === 2 && (
-            <div>
-              <h5 className="fw-bold mb-3 text-danger">Bước 2: Cấp năng lượng (API Key) cho AI</h5>
-              <div className="alert alert-warning p-3" style={{ fontSize: '0.9rem', lineHeight: '1.6' }}>
-                <strong>TẠI SAO CẦN BƯỚC NÀY?</strong><br/>
-                Để AI tư vấn riêng tư và thông minh nhất cho <strong>{formData.childName || "con"}</strong>, mỗi gia đình cần một "Túi năng lượng" (API Key) hoàn toàn miễn phí từ Google. <br/><br/>
-                <strong>🔑 HƯỚNG DẪN CẦM TAY CHỈ VIỆC (Mất 1 phút):</strong>
-                <ol className="mb-0 mt-2 p-0 ps-3">
-                  <li className="mb-2">Bấm vào đường link này (Nên mở thẻ mới): <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" className="fw-bold text-primary">Google AI Studio</a></li>
-                  <li className="mb-2">Đăng nhập bằng tài khoản Gmail của bạn.</li>
-                  <li className="mb-2">Bấm nút màu xanh <strong>"Create API Key"</strong>.</li>
-                  <li className="mb-2">Chọn dòng đầu tiên <strong>"Create API key in new project"</strong>. Cứ chờ nó chạy 1 tí.</li>
-                  <li className="mb-2">Nó sẽ hiện ra một chuỗi chữ và số rất dài. Bấm chữ <strong>"Copy"</strong>.</li>
-                  <li>Quay lại trang này và <strong>Dán (Paste)</strong> vào ô bên dưới.</li>
-                </ol>
+            <div className="fade-in">
+              <div className="d-flex align-items-center mb-4">
+                <div className="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: '32px', height: '32px', flexShrink: 0, fontWeight: 800 }}>2</div>
+                <h5 className="mb-0">Kích hoạt Năng lượng AI</h5>
+              </div>
+
+              <div className="p-3 rounded-4 mb-4" style={{ background: 'rgba(255, 193, 7, 0.1)', borderLeft: '4px solid #ffc107' }}>
+                <p className="small mb-1 text-dark"><strong>Tại sao cần bước này?</strong></p>
+                <p className="small mb-0 text-muted" style={{ lineHeight: 1.5 }}>Để AI tư vấn riêng tư nhất cho <strong>{formData.childName || "con"}</strong>, mỗi gia đình cần một "Túi năng lượng" (API Key) miễn phí từ Google.</p>
+              </div>
+
+              <div className="mb-4">
+                <div className="small fw-bold text-uppercase opacity-75 mb-2">Hướng dẫn nhanh (1 phút):</div>
+                <div className="bg-light p-3 rounded-4 small border">
+                  <ol className="mb-0 ps-3">
+                    <li className="mb-2">Mở: <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noreferrer" className="fw-bold text-primary text-decoration-none">Google AI Studio ↗</a></li>
+                    <li className="mb-2">Bấm <strong>"Create API Key"</strong> & chờ giây lát.</li>
+                    <li><strong>Copy</strong> mã chuỗi dài và <strong>Dán</strong> vào ô dưới.</li>
+                  </ol>
+                </div>
               </div>
               
-              <div className="mb-3 mt-4">
-                <label className="form-label fw-bold">Dán mã API Key của bạn vào đây:</label>
-                <input type="text" className="form-control border-primary" placeholder="AIzaSy..." value={formData.apiKey} onChange={e => setFormData({...formData, apiKey: e.target.value})} />
+              <div className="mb-4">
+                <label className="form-label small fw-bold text-uppercase opacity-75">Dán mã API Key tại đây</label>
+                <input 
+                  type="text" className="form-control form-input-modern border-primary shadow-sm" 
+                  placeholder="AIzaSy..." 
+                  value={formData.apiKey} 
+                  onChange={e => setFormData({...formData, apiKey: e.target.value})} 
+                />
               </div>
               
-              <div className="d-flex gap-2">
-                <button className="btn btn-secondary fw-bold" style={{ padding: '12px', borderRadius: '12px', flex: '1' }} onClick={() => setStep(1)}>⬅️ QUAY LẠI</button>
-                <button className="btn btn-success fw-bold" style={{ padding: '12px', borderRadius: '12px', flex: '2' }} onClick={finish}>✅ HOÀN TẤT & VÀO APP</button>
+              <div className="d-flex gap-3">
+                <button className="btn-modern btn-light border flex-grow-1" onClick={() => setStep(1)}>
+                  QUAY LẠI
+                </button>
+                <button className="btn-modern btn-success flex-grow-[2]" onClick={finish}>
+                  BẮT ĐẦU NGAY ✨
+                </button>
               </div>
             </div>
           )}
-
         </div>
       </div>
     </div>
+  );
+}
+
   );
 }
